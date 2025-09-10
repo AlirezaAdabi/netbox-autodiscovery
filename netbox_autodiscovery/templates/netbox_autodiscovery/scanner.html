@@ -1,0 +1,21 @@
+{% extends 'generic/object.html' %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+  <h2>Scanner: {{ object.name }}</h2>
+  <table class="table table-striped">
+    <tr><th>Type</th><td>{{ object.get_type_display }}</td></tr>
+    <tr><th>Created</th><td>{{ object.created }}</td></tr>
+    <tr><th>Params</th><td><pre>{{ object.params|default:"-" }}</pre></td></tr>
+  </table>
+
+  <p>
+    <a href="{% url 'plugins:netbox_autodiscovery:scanner_run' pk=object.pk %}"
+       class="btn btn-primary">
+      Run Scanner
+    </a>
+  </p>
+
+  <h3>Runs</h3>
+  {% render_table object.runs.all|slice:":10" %}
+{% endblock %}

@@ -1,0 +1,6 @@
+[project]
+name = "netbox-autodiscovery"
+version = "0.1"
+description = "Auto Discovery plugin for NetBox"
+authors = [{name="Your Name"}]
+dependencies = []

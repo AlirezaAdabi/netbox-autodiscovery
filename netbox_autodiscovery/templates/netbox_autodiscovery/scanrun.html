@@ -1,0 +1,28 @@
+{% extends 'generic/object.html' %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+  <h2>Scan Run #{{ object.pk }}</h2>
+
+  <table class="table table-striped">
+    <tr><th>Scanner</th><td><a href="{{ object.scanner.get_absolute_url }}">{{ object.scanner }}</a></td></tr>
+    <tr><th>Status</th><td>{{ object.status }}</td></tr>
+    <tr><th>Started</th><td>{{ object.started }}</td></tr>
+    <tr><th>Finished</th><td>{{ object.finished|default:"-" }}</td></tr>
+  </table>
+
+  {% if object.stats %}
+    <h3>Stats</h3>
+    <table class="table table-sm">
+      {% for key, val in object.stats.items %}
+        <tr><th>{{ key }}</th><td>{{ val }}</td></tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+
+  <h3>Log</h3>
+  <pre style="max-height:300px; overflow-y:scroll;">{{ object.log|default:"(no log)" }}</pre>
+
+  <h3>Findings</h3>
+  {% render_table findings %}
+{% endblock %}
