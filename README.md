@@ -49,7 +49,8 @@ Edit `configuration/plugins.py` and add:
 
 ### 3\. Add Dockerfile-Plugin
 
-`FROM netboxcommunity/netbox:latest
+```bash
+FROM netboxcommunity/netbox:latest
 
 # Install plugin requirements
 COPY ./plugins/netbox-autodiscovery/plugin_requirements.txt /opt/netbox/netbox_autodiscovery/
@@ -58,17 +59,15 @@ RUN /usr/local/bin/uv pip install -r /opt/netbox/netbox_autodiscovery/plugin_req
 # Install your local plugin source (editable-style inside container)
 COPY ./plugins/netbox-autodiscovery /opt/netbox/netbox_autodiscovery
 RUN /usr/local/bin/uv pip install -e /opt/netbox/netbox_autodiscovery
-
-
-# If your plugin ships static files, collect them:
-# RUN DEBUG="true" SECRET_KEY="dummydummydummydummydummydummydummydummydummy" \
-#     /opt/netbox/venv/bin/python /opt/netbox/netbox/manage.py collectstatic --no-input
-`
+```
 
 ### 4\. Add Dockerfile-Plugins to Dockerfile
-   ` build:
+ 
+```bash
+build:
       context: .
-      dockerfile: Dockerfile-Plugins`
+      dockerfile: Dockerfile-Plugins
+```
 
 
 ### 5\. Rebuild NetBox Docker
@@ -78,10 +77,12 @@ docker compose up -d`
 
 ### 6\. Run migrations
 
-`
+```bash
 docker compose exec --user root netbox python manage.py makemigrations netbox_autodiscovery
+
 docker compose exec netbox python manage.py migrate netbox_autodiscovery
-`
+
+```
 
 * * * * *
 
