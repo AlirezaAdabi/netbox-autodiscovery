@@ -33,11 +33,13 @@ class ScanRunTable(NetBoxTable):
         return format_html('<a href="{}">Run #{}</a>', url, record.pk)
     
     
-class ScanFindingTable(NetBoxTable):
+class ScanFindingTable(tables.Table):  # ✅ plain table, no NetBox-specific actions
     summary = tables.Column()
     details = tables.Column()
 
-    class Meta(NetBoxTable.Meta):
+    class Meta:
         model = ScanFinding
         fields = ("summary", "details", "created")
         default_columns = ("summary", "details", "created")
+
+
