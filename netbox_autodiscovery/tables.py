@@ -26,6 +26,7 @@ class ScanRunTable(NetBoxTable):
         model = ScanRun
         fields = ("pk", "run","scanner", "status", "started", "finished")
         default_columns = ("run","scanner", "status", "started", "finished")
+        exclude = ("actions",)
         
     def render_run(self, record):
         # 'record' is the ScanRun instance
@@ -33,7 +34,7 @@ class ScanRunTable(NetBoxTable):
         return format_html('<a href="{}">Run #{}</a>', url, record.pk)
     
     
-class ScanFindingTable(tables.Table):  # ✅ plain table, no NetBox-specific actions
+class ScanFindingTable(tables.Table): 
     summary = tables.Column()
     details = tables.Column()
 

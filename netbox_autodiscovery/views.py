@@ -59,10 +59,7 @@ class ScannerBulkDeleteView(generic.BulkDeleteView):
     table = ScannerTable
 
 
-class ScannerBulkEditView(generic.BulkEditView):
-    queryset = Scanner.objects.all()
-    table = ScannerTable
-    form = ScannerForm
+
 
 
 class ScannerChangeLogView(generic.ObjectChangeLogView):

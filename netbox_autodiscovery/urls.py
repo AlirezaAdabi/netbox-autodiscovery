@@ -15,7 +15,6 @@ urlpatterns = [
     name="scanner_changelog",
     ),
     path("scanners/delete/", views.ScannerBulkDeleteView.as_view(), name="scanner_bulk_delete"),
-    path("scanners/edit/", views.ScannerBulkEditView.as_view(), name="scanner_bulk_edit"),
 
     # Runs
     path("runs/", views.ScanRunListView.as_view(), name="scanrun_list"),

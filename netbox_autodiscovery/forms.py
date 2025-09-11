@@ -52,24 +52,3 @@ class ScannerForm(NetBoxModelForm):
             obj.save()
         return obj
 
-class ScannerBulkEditForm(NetBoxModelBulkEditForm):
-    cidr = forms.CharField(required=False)
-    hostname = forms.CharField(required=False)
-    community = forms.CharField(required=False)
-    fake_mode = forms.BooleanField(required=False)
-
-    class Meta:
-        model = Scanner
-        fields = ("type", "cidr", "hostname", "community", "fake_mode")
-
-    def clean(self):
-        cleaned = super().clean()
-        params = {}
-        if cleaned.get("cidr"):
-            params["cidr"] = cleaned["cidr"]
-        if cleaned.get("hostname"):
-            params["hostname"] = cleaned["hostname"]
-        if cleaned.get("community"):
-            params["community"] = cleaned["community"]
-        self.cleaned_data["params"] = params
-        return cleaned
