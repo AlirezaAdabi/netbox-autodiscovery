@@ -7,5 +7,8 @@ class AutoDiscoveryConfig(PluginConfig):
     version = "0.1"
     base_url = "autodiscovery"
     min_version = "4.0.0"
+    author = "Alireza Adabi"
+    author_email = "alireza.adabi78@gmail.com"
+
 
 config = AutoDiscoveryConfig
